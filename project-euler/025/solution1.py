@@ -1,6 +1,11 @@
 import math
 from decimal import Decimal
 
+"""
+I like this. Because its simple and
+elegant.
+"""
+
 def solve():
     digits = 1000
 
@@ -9,11 +14,10 @@ def solve():
     big = Decimal(10)**(digits - 1)
     big *= Decimal(math.sqrt(5))
 
-    x = big.ln() / PHI.ln()
-    x = math.ceil(x)
+    index = big.ln() / PHI.ln()
+    index = math.ceil(index)
 
-    print(x)
-    
+    print(index)
 
 if __name__ == "__main__":
-    solve()
+    solve() # This solves the thing
