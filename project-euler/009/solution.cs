@@ -1,6 +1,6 @@
 using System;
 
-namespace Eucids009
+namespace Euclids009
 {
 	internal class Program
 	{
@@ -17,7 +17,7 @@ namespace Eucids009
 			int m2 = m * m;
 			int n2 = n * n;
 
-			// Euclid's Formula's definitions
+			// Euclid's Formula definitions
 			int sideA = m2 - n2;
 			int sideB = 2 * m * n;
 			int sideC = m2 + n2;
@@ -29,15 +29,20 @@ namespace Eucids009
 		// Find the pair of factors closest to sqrt(n)
 		public static (int factor1, int factor2) SqrtFactors(int product)
 		{
-			int factor = (int)(Math.Sqrt(product));
+			// Start with sqrt(semiperimeter / 2) lower bound as it is faster... (marginally)
+			// See written proof for more detail
+			int factor = (int)Math.Ceiling(Math.Sqrt(product / 2));
+			int upperBound = (int)Math.Sqrt(product);
 
 			bool found = false;
 
 			while (!found) {
-				if (product % factor == 0) {
+				if (factor > upperBound) {
+					throw new ArgumentException($"Invalid Pythagorean triplet");
+				} else if (product % factor == 0) {
 					found = true;
 				} else {
-					factor --;
+					factor++;
 				}
 			}
 			
