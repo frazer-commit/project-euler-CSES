@@ -1,32 +1,35 @@
+import math
+
 """
-I like this one
+Eucild's Formula solution.
 """
 
-def find_triplet(n = 1000):
-    a = 0
-    b = 0
-    c = 0
+def find_half_sqrt_factors(n):
+    target = n // 2
+    factor = int(math.sqrt(target))
+    
+    found = False
 
-    triplet = True
+    while not found:
+        if n % factor == 0:
+            found = True
+        else:
+            factor -= 1
 
-    while a + b + c != 1000 or not triplet:
-        a += 1
-        b = 0
-        while a + b + c < 1000:
-            b += 1
-            c = (a**2 + b**2)**(1/2)
-            
-            triplet = (c % 1 == 0)
-        
-    return a, b, c
+    return (target // factor, factor)
+
 
 def solve():
     n = 1000
 
-    tri = find_triplet(n)
-    product = tri[0] * tri[1] * tri[2]
+    pair = find_half_sqrt_factors(n)
     
-    print(tri)
+    n = pair[0] - pair[1]
+    m = pair[1]
+
+    prod = 2 * m * n * (m**4 - n**4)
+
+    print(prod)
 
 if __name__ == "__main__":
     solve()
